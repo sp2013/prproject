@@ -2,7 +2,6 @@ from sklearn import datasets
 from sklearn import svm
 
 
-
 class ML:
     """"""
     def __init__(self,):
@@ -13,4 +12,6 @@ class ML:
         clf = svm.SVC(gamma=0.001, C=100.)
         X, y = iris.data, iris.target
         clf.fit(X, y)
+
+
         
