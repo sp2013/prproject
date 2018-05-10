@@ -4,6 +4,8 @@ from sampleClass import *
 from machineLearning import *
 from openCVops import *
 
+from sandbox.openCVops import addRedSquareAtCenter
+
 if __name__ == '__main__':
 
     print('Entering main function')
@@ -21,6 +23,8 @@ if __name__ == '__main__':
     obj.train()
 
     dispNumpyArrayAsImage(imageName)
+
+    addRedSquareAtCenter(imageName)
 
 
 

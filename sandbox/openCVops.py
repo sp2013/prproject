@@ -10,10 +10,15 @@ from matplotlib import pyplot as plt
 def dispNumpyArrayAsImage(image):
 
     imgArray = cv2.imread(image)
-    imgArray[0:100, 0:100] = (255, 0, 0)
     plt.imshow(imgArray, interpolation='nearest')
     plt.show()
     return
 
-def addRedSquareAtCenter(image)
-    
+def addRedSquareAtCenter(image):
+    imgArray = cv2.imread(image)
+    centerX = imgArray.shape[0]/2
+    centerY = imgArray.shape[1]/2
+    imgArray[0:100, 0:100] = (255, 0, 0)
+    plt.imshow(imgArray, interpolation='nearest')
+    plt.show()
+    return
