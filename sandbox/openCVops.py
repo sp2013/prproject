@@ -24,4 +24,5 @@ def addRedSquareAtCenter(image):
     return
 
 def cropImage(image)
+    # code to crop image
     return
