@@ -1,0 +1,12 @@
+# Ignore everything
+*
+# Don't ignore directories so we can recurse in to them
+!*/
+
+sandbox/.idea
+
+# Don't ignore .gitignore
+!.gitignore
+
+# Exclude these types
+*.pyc
