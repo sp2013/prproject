@@ -22,3 +22,6 @@ def addRedSquareAtCenter(image):
     plt.imshow(imgArray, interpolation='nearest')
     plt.show()
     return
+
+def cropImage(image)
+    return
