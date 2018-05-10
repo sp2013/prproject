@@ -13,3 +13,7 @@ def dispNumpyArrayAsImage(image):
     imgArray[0:100, 0:100] = (255, 0, 0)
     plt.imshow(imgArray, interpolation='nearest')
     plt.show()
+    return
+
+def addRedSquareAtCenter(image)
+    
