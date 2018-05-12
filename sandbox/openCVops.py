@@ -23,6 +23,3 @@ def addRedSquareAtCenter(image):
     plt.show()
     return
 
-def cropImage(image)
-    # code to crop image
-    return

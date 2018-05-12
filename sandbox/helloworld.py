@@ -14,7 +14,7 @@ if __name__ == '__main__':
 
     fun1();  # directly calling the function.
 
-    imageName = '/home/priyal/Pictures/app1.png'
+    imageName = '/home/priyal/Pictures/test/apples.jpeg'
     #displayImage('/media/priyal/427E3C177E3C0667/DG_images/medc.jpg') #here media is partitioned drive.
 
     displayImage(imageName)
