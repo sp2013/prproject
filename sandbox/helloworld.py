@@ -1,30 +1,28 @@
 from fn1 import *
 import fn1 as obj
 from sampleClass import *
-from machineLearning import *
-from openCVops import *
+from machinelearning import *
+import opencvops as cvobj
+import skimageops as sk
 
-from sandbox.openCVops import addRedSquareAtCenter
 
 if __name__ == '__main__':
 
     print('Entering main function')
 
     obj.fun1() # using obj for calling function.
-
     fun1();  # directly calling the function.
 
-    imageName = '/home/priyal/Pictures/test/apples.jpeg'
-    #displayImage('/media/priyal/427E3C177E3C0667/DG_images/medc.jpg') #here media is partitioned drive.
+    objML = ML() # instantiate ML class
+    objML.train()
 
-    displayImage(imageName)
+    imageName = '/home/priyal/Pictures/test/apples.jpg'
 
-    obj = ML()
-    obj.train()
-
-    dispNumpyArrayAsImage(imageName)
-
-    addRedSquareAtCenter(imageName)
+    sk.displayimage(imageName)
+    cvobj.displaynumpyarray(imageName)
+    cvobj.addsquareatcenter(imageName, (0, 0, 0))
+    cvobj.addghorzstripes(imageName, (255, 0, 0)) # order is bgr
+    cvobj.addgvertstripes(imageName, (0, 0, 255))  # order is bgr
 
 
 

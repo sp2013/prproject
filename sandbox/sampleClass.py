@@ -1,6 +1,7 @@
-#sampleClass to test class template
+# sampleClass to test class template
 
-class MypythonClass():
+
+class MyPythonClass:
 
     """ this is sample class for
         testing the live template
