@@ -1,12 +1,10 @@
-# Ignore everything
-*
-# Don't ignore directories so we can recurse in to them
-!*/
+# ignore .idea and it's subfolders.
+.idea/
 
-sandbox/.idea
+# ignore files with extension pyc
+*.pyc
 
 # Don't ignore .gitignore
 !.gitignore
 
-# Exclude these types
-*.pyc
+
