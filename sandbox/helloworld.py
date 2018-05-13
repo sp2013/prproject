@@ -23,6 +23,7 @@ if __name__ == '__main__':
     cvobj.addsquareatcenter(imageName, (0, 0, 0))
     cvobj.addghorzstripes(imageName, (255, 0, 0)) # order is bgr
     cvobj.addgvertstripes(imageName, (0, 0, 255))  # order is bgr
+    cvobj.createnparrays()
 
 
 
