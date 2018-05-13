@@ -73,5 +73,6 @@ def createnparrays():
     print(x + y)
     print("other way of adding array")
     print(np.add(x, y))
+    print(np.sqrt(x))
 
 
