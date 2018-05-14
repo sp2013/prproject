@@ -1,5 +1,4 @@
 import numpy as np
-from skimage import data
 from skimage import io
 from matplotlib import pyplot as plt
 

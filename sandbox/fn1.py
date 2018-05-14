@@ -1,4 +1,6 @@
-
+'''
+    basic tests module.
+'''
 
 def fun1():
     print('this part is to be made part of a function')
@@ -6,6 +8,15 @@ def fun1():
     y = {6, 7, 8}
     # x = np.zeros(4)
     print(x)
+    return
+
+
+def greetings():
+    return 'hello...good morning'
+
+
+
+
 
 
 

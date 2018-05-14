@@ -10,6 +10,8 @@ if __name__ == '__main__':
 
     print('Entering main function')
 
+    print(greetings())
+
     obj.fun1() # using obj for calling function.
     fun1();  # directly calling the function.
 
