@@ -6,6 +6,7 @@ from sandbox import *
 import opencvops as cvobj
 import numpyops as npops
 from sampleClass import MyPythonClass
+import basicimaging as img
 
 # two different ways of importing 'simplefunctions'
 from simplefunctions import *
@@ -48,4 +49,8 @@ def testnumpyops():
     npops.displayattributes()
     npops.createsomemorematrices()
     npops.datatypesconversion()
+    return
+
+def testbasicimaging():
+    img.cropresize(appleimage)
     return

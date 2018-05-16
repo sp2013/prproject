@@ -8,6 +8,8 @@ from testfunctions import *
 
 if __name__ == '__main__':
 
+    testbasicimaging()
+
     # function to test numpy operations.
     testnumpyops()
 
@@ -22,3 +24,4 @@ if __name__ == '__main__':
 
     # function to test open cv operations.
     testopencvops()
+
