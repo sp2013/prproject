@@ -9,3 +9,4 @@ class MyPythonClass:
 
     def __init__(self,):
         """Constructor for """
+        print('inside MyPythonClass constructor')

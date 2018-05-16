@@ -2,12 +2,16 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
+from basicimaging import *
+
 ''' 
     this function shows how to read image in to numpy array 
     and display it using matplotlib.
     also shows how to modify numpy array contents.
     OpenCV represents RGB images as multi-dimensional NumPy arrays…but in reverse order!
 '''
+
+appleimage = '/home/priyal/Pictures/test/apples.jpg'
 
 
 def displaynumpyarray(image):
@@ -74,5 +78,38 @@ def createnparrays():
     print("other way of adding array")
     print(np.add(x, y))
     print(np.sqrt(x))
+    return
+
+def readwritedisplay():
+
+    left = 0
+    top = 50
+    right = 150
+    bottom = 150
+
+    image = cv2.imread(appleimage, cv2.IMREAD_COLOR)
+    croppedimage = cropimage(appleimage, left, top, right, bottom)
+    gray_image = clrtogray(appleimage)
+    hsv_image = clrtohsv(appleimage)
+
+    # DISPLAY image
+    # Create a window for display.
+    cv2.namedWindow("input image", cv2.WINDOW_AUTOSIZE)
+    cv2.namedWindow("cropped image", cv2.WINDOW_NORMAL)
+    cv2.namedWindow("gray image", cv2.WINDOW_NORMAL)
+    cv2.namedWindow("hsv image", cv2.WINDOW_NORMAL)
+
+    cv2.imshow("input image", image)
+    cv2.imshow("cropped image", croppedimage)
+    cv2.imshow("gray image", gray_image)
+    cv2.imshow("hsv image", hsv_image)
+
+    cv2.waitKey(0)  # Wait for a keystroke in the window
+
+    cv2.destroyAllWindows()
+
+    return
+
+
 
 
