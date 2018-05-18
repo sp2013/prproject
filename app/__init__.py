@@ -11,17 +11,17 @@ if __name__ == '__main__':
     testbasicimaging()
 
     # function to test numpy operations.
-    testnumpyops()
+    # testnumpyops()
 
     # function to test class instantiation.
-    testclass()
+    # testclass()
 
     # function to test simple functions.
-    testsimplefunctions()
+    # testsimplefunctions()
 
     # function to test machine learning methods.
-    testmachinelearning()
+    # testmachinelearning()
 
     # function to test open cv operations.
-    testopencvops()
+    # testopencvops()
 

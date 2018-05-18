@@ -53,4 +53,6 @@ def testnumpyops():
 
 def testbasicimaging():
     img.cropresize(appleimage)
+    img.rotateimage(appleimage, 45)
+    img.drawshapes(appleimage)
     return

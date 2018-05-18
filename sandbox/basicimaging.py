@@ -65,6 +65,79 @@ def cropresize(image):
     cv2.imshow("Cropped Image", crop)
 
     cv2.waitKey(0)
-
+    cv2.destroyAllWindows()
     return
+
+
+'''
+    rotate image as per input angle
+'''
+def rotateimage(image, angle):
+
+    src = cv2.imread(image)
+
+    dims = src.shape # get image shape
+    scale = 1
+
+    # The getRotationMatrix2D function takes the following parameters:
+    # Center: point about which rotation will occur
+    # rotationAngle: angle by which rotation is occurring
+    # Scale : an optional scaling factor
+
+    rotationMatrix = cv2.getRotationMatrix2D((dims[1] / 2, dims[0] / 2), angle, scale)
+
+    print(rotationMatrix)
+
+    result = cv2.warpAffine(src, rotationMatrix, (dims[1], dims[0]))
+
+    cv2.imshow("Input Image", src)
+    cv2.imshow("Rotated Image", result)
+
+    cv2.waitKey()
+    cv2.destroyAllWindows()
+    return
+
+
+'''
+    Draw different shapes on the image
+'''
+def drawshapes(image):
+
+    input = cv2.imread(image)
+    src = cv2.resize(input, None, fx=3, fy=3, interpolation=cv2.INTER_LINEAR)
+
+    # Draw a line
+    imageLine = src.copy()
+    cv2.line(imageLine, (322, 179), (400, 183), (0, 255, 0), thickness=2, lineType=cv2.LINE_AA)
+    cv2.imshow("imageLine", imageLine)
+
+    # Draw a circle
+    imageCircle = src.copy()
+    cv2.circle(imageCircle, (350, 200), 150, (0, 255, 0), thickness=2, lineType=cv2.LINE_AA)
+    cv2.imshow("imageCircle", imageCircle)
+
+    # Draw an ellipse
+    # IMP Note: Ellipse Centers and Axis lengths must be integers
+    imageEllipse = src.copy()
+    cv2.ellipse(imageEllipse, (360, 200), (100, 170), 45, 0, 360, (255, 0, 0), thickness=2, lineType=cv2.LINE_AA)
+    cv2.ellipse(imageEllipse, (360, 200), (100, 170), 135, 0, 360, (0, 0, 255), thickness=2, lineType=cv2.LINE_AA)
+    cv2.imshow("ellipse", imageEllipse)
+
+    # Draw a rectangle (thickness is a positive integer)
+    imageRectangle = src.copy()
+    cv2.rectangle(imageRectangle, (208, 55), (450, 355), (0, 255, 0), thickness=2, lineType=cv2.LINE_8)
+    cv2.imshow("rectangle", imageRectangle)
+
+    # Put text into image
+    imageText = src.copy()
+    cv2.putText(imageText, "Mark Zuckerberg", (205, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+    cv2.imshow("text", imageText)
+
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+    return
+
+
+
+
 
