@@ -7,6 +7,7 @@ import opencvops as cvobj
 import numpyops as npops
 from sampleClass import MyPythonClass
 import basicimaging as img
+import mouseinterface as mouse
 
 # two different ways of importing 'simplefunctions'
 from simplefunctions import *
@@ -56,3 +57,8 @@ def testbasicimaging():
     img.rotateimage(appleimage, 45)
     img.drawshapes(appleimage)
     return
+
+def testmouseinterface():
+    mouse.launchcircledraw()
+    return
+
