@@ -8,7 +8,9 @@ from testfunctions import *
 
 if __name__ == '__main__':
 
-    testmouseinterface()
+    testmorphology()
+
+    # testmouseinterface()
 
     # testbasicimaging()
 

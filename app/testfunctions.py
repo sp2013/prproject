@@ -8,6 +8,7 @@ import numpyops as npops
 from sampleClass import MyPythonClass
 import basicimaging as img
 import mouseinterface as mouse
+import morphology as morph
 
 # two different ways of importing 'simplefunctions'
 from simplefunctions import *
@@ -17,6 +18,8 @@ import simplefunctions as obj
 from machinelearning import ML
 
 appleimage = '/home/priyal/Pictures/test/apples.jpg'
+morphimage = '/home/priyal/Pictures/test/morph0.png'
+
 
 def testclass():
     classobj = MyPythonClass()
@@ -60,5 +63,9 @@ def testbasicimaging():
 
 def testmouseinterface():
     mouse.launchcircledraw()
+    return
+
+def testmorphology():
+    morph.erode(morphimage)
     return
 
