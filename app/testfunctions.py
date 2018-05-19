@@ -1,7 +1,8 @@
 import sys
-sys.path.append('../sandbox')
-
+sys.path.append('../sandbox') # required to import package sandbox setting relative path.
 from sandbox import *
+
+import cv2
 
 import opencvops as cvobj
 import numpyops as npops
@@ -9,6 +10,7 @@ from sampleClass import MyPythonClass
 import basicimaging as img
 import mouseinterface as mouse
 import morphology as morph
+import connectedcomponents as cc
 
 # two different ways of importing 'simplefunctions'
 from simplefunctions import *
@@ -18,7 +20,9 @@ import simplefunctions as obj
 from machinelearning import ML
 
 appleimage = '/home/priyal/Pictures/test/apples.jpg'
-morphimage = '/home/priyal/Pictures/test/morph0.png'
+morphimage0 = '/home/priyal/Pictures/test/morph0.png'
+morphimage1 = '/home/priyal/Pictures/test/morph1.png'
+morphimage2 = '/home/priyal/Pictures/test/morph2.png'
 
 
 def testclass():
@@ -66,6 +70,14 @@ def testmouseinterface():
     return
 
 def testmorphology():
-    morph.erode(morphimage)
+    morph.erode(morphimage0)
+    morph.dilate(morphimage0)
+    morph.open(morphimage1)
+    morph.close(morphimage2)
     return
+
+def testconnectedcomponents():
+    cc.ccanalysis(morphimage0)
+    return
+
 
