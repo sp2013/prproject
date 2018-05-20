@@ -77,7 +77,8 @@ def testmorphology():
     return
 
 def testconnectedcomponents():
-    cc.ccanalysis(morphimage0)
+    #cc.ccanalysis(morphimage0)
+    cc.ccanalysiswithstats(morphimage0)
     return
 
 
