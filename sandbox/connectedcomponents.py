@@ -45,6 +45,9 @@ def ccanalysis(image):
 def ccanalysiswithstats(image):
 
     img = cv2.imread(image)
+    print("Image dimensions: {} pixels".format(img.shape)) # formatted print function
+    print("Image dimensions: width {}, height {}, channels {}".format(img.shape[0],
+          img.shape[1], img.shape[2])) # formatted print function
     img_binary = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
     buffer = np.ones((img.shape[0], img.shape[1]), dtype=np.ushort)
     output = cv2.connectedComponentsWithStats(img_binary, buffer)

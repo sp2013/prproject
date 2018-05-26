@@ -11,6 +11,9 @@ import basicimaging as img
 import mouseinterface as mouse
 import morphology as morph
 import connectedcomponents as cc
+import logicaloperations as lp
+import colorspaces as cs
+import filters as filter
 
 # two different ways of importing 'simplefunctions'
 from simplefunctions import *
@@ -19,10 +22,11 @@ import simplefunctions as obj
 # importing ML class
 from machinelearning import ML
 
-appleimage = '/home/priyal/Pictures/test/apples.jpg'
-morphimage0 = '/home/priyal/Pictures/test/morph0.png'
-morphimage1 = '/home/priyal/Pictures/test/morph1.png'
-morphimage2 = '/home/priyal/Pictures/test/morph2.png'
+appleimage = '/home/priyal/Pictures/test/apples.jpg' # 224 x 224
+morphimage0 = '/home/priyal/Pictures/test/morph0.png' # 500 x 500
+morphimage1 = '/home/priyal/Pictures/test/morph1.png' # 850 x 760
+morphimage2 = '/home/priyal/Pictures/test/morph2.png' # 850 x 760
+juggballs = '/home/priyal/Pictures/test/balls.jpg'   # 800 x 600
 
 
 def testclass():
@@ -80,5 +84,21 @@ def testconnectedcomponents():
     #cc.ccanalysis(morphimage0)
     cc.ccanalysiswithstats(morphimage0)
     return
+
+def testlogicaloperations():
+    # lp.logicaloperations()
+    # lp.applymask(juggballs)
+    lp.splitnmerge(juggballs)
+    return
+
+def testcolorspaces():
+    cs.colorspaces(juggballs)
+    return
+
+def testfilters():
+    filter.averaging(appleimage)
+    return
+
+
 
 

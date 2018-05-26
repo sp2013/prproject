@@ -8,7 +8,13 @@ from testfunctions import *
 
 if __name__ == '__main__':
 
-    testconnectedcomponents()
+    testfilters()
+
+    # testcolorspaces()
+
+    # testlogicaloperations()
+
+    # testconnectedcomponents()
 
     # testmorphology()
 
