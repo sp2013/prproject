@@ -15,6 +15,7 @@ import logicaloperations as lp
 import colorspaces as cs
 import filters as filter
 import histograms as hist
+import threshold as thld
 
 # two different ways of importing 'simplefunctions'
 from simplefunctions import *
@@ -111,6 +112,12 @@ def testhistograms():
     # hist.grayhistogram(histo0 )
     # hist.colorhistogram(appleimage)
     return
+
+def testthreshold():
+    thld.adaptivethreshold()
+    # thld.simplethreshold()
+    return
+
 
 
 

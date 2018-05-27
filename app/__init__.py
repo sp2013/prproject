@@ -8,9 +8,11 @@ from testfunctions import *
 
 if __name__ == '__main__':
 
+    testthreshold()
+
     # testhistograms()
 
-    testfilters()
+    # testfilters()
 
     # testcolorspaces()
 
