@@ -14,6 +14,7 @@ import connectedcomponents as cc
 import logicaloperations as lp
 import colorspaces as cs
 import filters as filter
+import histograms as hist
 
 # two different ways of importing 'simplefunctions'
 from simplefunctions import *
@@ -27,6 +28,9 @@ morphimage0 = '/home/priyal/Pictures/test/morph0.png' # 500 x 500
 morphimage1 = '/home/priyal/Pictures/test/morph1.png' # 850 x 760
 morphimage2 = '/home/priyal/Pictures/test/morph2.png' # 850 x 760
 juggballs = '/home/priyal/Pictures/test/balls.jpg'   # 800 x 600
+grayimg = '/home/priyal/Pictures/test/flower_gray.jpg'   # 800 x 600
+flower = '/home/priyal/Pictures/test/flower.jpg'   # 800 x 600
+histo0 = '/home/priyal/Pictures/test/histo_0.bmp'   # 800 x 600
 
 
 def testclass():
@@ -96,7 +100,16 @@ def testcolorspaces():
     return
 
 def testfilters():
-    filter.averaging(appleimage)
+    filter.BilateralBlur(grayimg)
+    # filter.MedianBlur(grayimg)
+    # filter.GaussianSmooth(grayimg)
+    # filter.averaging(appleimage)
+    return
+
+def testhistograms():
+    hist.histoequalize(grayimg)
+    # hist.grayhistogram(histo0 )
+    # hist.colorhistogram(appleimage)
     return
 
 

@@ -8,6 +8,8 @@ from testfunctions import *
 
 if __name__ == '__main__':
 
+    # testhistograms()
+
     testfilters()
 
     # testcolorspaces()
