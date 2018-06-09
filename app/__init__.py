@@ -8,7 +8,7 @@ from testfunctions import *
 
 if __name__ == '__main__':
 
-    testthreshold()
+    # testthreshold()
 
     # testhistograms()
 
@@ -39,5 +39,5 @@ if __name__ == '__main__':
     # testmachinelearning()
 
     # function to test open cv operations.
-    # testopencvops()
+    testopencvops()
 

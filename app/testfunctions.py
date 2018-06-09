@@ -24,7 +24,7 @@ import simplefunctions as obj
 # importing ML class
 from machinelearning import ML
 
-appleimage = '/home/priyal/Pictures/test/apples.jpg' # 224 x 224
+appleimage = '../testData/apples_.jpg' # 224 x 224
 morphimage0 = '/home/priyal/Pictures/test/morph0.png' # 500 x 500
 morphimage1 = '/home/priyal/Pictures/test/morph1.png' # 850 x 760
 morphimage2 = '/home/priyal/Pictures/test/morph2.png' # 850 x 760
