@@ -16,6 +16,8 @@ import colorspaces as cs
 import filters as filter
 import histograms as hist
 import threshold as thld
+import gradient as grad
+import captureimg as cam
 
 # two different ways of importing 'simplefunctions'
 from simplefunctions import *
@@ -28,11 +30,22 @@ appleimage = '../testData/apples_.jpg' # 224 x 224
 morphimage0 = '/home/priyal/Pictures/test/morph0.png' # 500 x 500
 morphimage1 = '/home/priyal/Pictures/test/morph1.png' # 850 x 760
 morphimage2 = '/home/priyal/Pictures/test/morph2.png' # 850 x 760
-juggballs = '/home/priyal/Pictures/test/balls.jpg'   # 800 x 600
+juggballs = '../testData/balls.jpg'   # 800 x 600
 grayimg = '/home/priyal/Pictures/test/flower_gray.jpg'   # 800 x 600
 flower = '/home/priyal/Pictures/test/flower.jpg'   # 800 x 600
 histo0 = '/home/priyal/Pictures/test/histo_0.bmp'   # 800 x 600
 
+def testcamera():
+    cam.cameraexpts();
+    return;
+
+
+def testgradient():
+    mag, angle = grad.computegradient(juggballs)
+    cv2.imshow("Gradient Image", mag)
+    cv2.imshow("Angle Image", angle)
+    cv2.waitKey()
+    return;
 
 def testclass():
     classobj = MyPythonClass()

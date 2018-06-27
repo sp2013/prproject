@@ -8,6 +8,10 @@ from testfunctions import *
 
 if __name__ == '__main__':
 
+    testcamera();
+
+    # testgradient()
+
     # testthreshold()
 
     # testhistograms()
@@ -39,5 +43,5 @@ if __name__ == '__main__':
     # testmachinelearning()
 
     # function to test open cv operations.
-    testopencvops()
+    # testopencvops()
 

@@ -88,5 +88,3 @@ def splitnmerge(image):
 
     return
 
-    return
-
