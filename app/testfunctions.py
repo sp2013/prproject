@@ -18,6 +18,7 @@ import histograms as hist
 import threshold as thld
 import gradient as grad
 import captureimg as cam
+import HOG as hg
 
 # two different ways of importing 'simplefunctions'
 from simplefunctions import *
@@ -34,6 +35,11 @@ juggballs = '../testData/balls.jpg'   # 800 x 600
 grayimg = '/home/priyal/Pictures/test/flower_gray.jpg'   # 800 x 600
 flower = '/home/priyal/Pictures/test/flower.jpg'   # 800 x 600
 histo0 = '/home/priyal/Pictures/test/histo_0.bmp'   # 800 x 600
+tjuggballs = '../testData/juggballs.jpg'
+
+def testHOG():
+    hg.getHOG(tjuggballs)
+    return
 
 def testcamera():
     cam.cameraexpts();

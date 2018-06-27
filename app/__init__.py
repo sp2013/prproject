@@ -8,7 +8,7 @@ from testfunctions import *
 
 if __name__ == '__main__':
 
-    testcamera();
+    testHOG()
 
     # testgradient()
 
