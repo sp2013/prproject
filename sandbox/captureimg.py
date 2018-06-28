@@ -11,4 +11,7 @@ def cameraexpts():
             break
     camera.release()
     cv2.destroyAllWindows()
-    returnb
+    return
+
+
+cameraexpts()
