@@ -1,38 +1,39 @@
 import numpy as np
-import gradient as grad
 import cv2
+
+import gradient as gradObj
 
 # compute histogram of gradients using magnitude and angle block.
 def computehistogram(angleblock, magblock):
-    cv2.imshow("Gradient Image", magblock)
-    cv2.waitKey()
+    #cv2.imshow("Gradient Image", magblock)
+    #cv2.waitKey()
+    # wrap around angle values beyond 180 - 360 to 0 - 180
     return
+
 
 def getHOG(imagepath):
 
     # get magnitude and angle image
-    mag, angle = grad.computegradient(imagepath)
-    # cv2.imshow("Gradient Image", mag)
-    # cv2.waitKey()
-    # cv2.destroyAllWindows()
+    grad, angle = gradObj.computegradient(imagepath)
+    #cv2.imshow("Gradient Image", grad)
+    #cv2.waitKey()
+    #cv2.destroyAllWindows()
 
     # mag and angle have three channels each. pick up max value of gradient and corresponding angle to convert
     # this to array with only one channel.
-    width = mag.shape[1]
-    height = mag.shape[0]
+    height, width, bytesperpix = grad.shape
 
-    gradient1D = np.array(width, height, dtype = np.float)
-    angle1D = np.array(width, height, dtype=np.float)
+    gradmax = np.amax(grad, axis=2)
+    gradmaxIndex = grad.argmax(axis=2)
+    #cv2.imshow("max gradient", gradmax[:,:])
+    #cv2.waitKey()
+    #cv2.destroyAllWindows()
 
+    # create anglemax matrix that holds angle values corresponding to the maximum gradient.
+    anglemax = np.zeros(shape=(height, width), dtype=np.float32)
     for rows in range(0, height):
         for cols in range(0, width):
-            maxgrad = np.maximum(mag[][])
-
-
-
-
-    # wrap around angle values beyond 180 - 360 to 0 - 180
-
+            anglemax[rows, cols] = angle[rows, cols, gradmaxIndex[rows, cols]]
 
     # compute histogram of gradients
 
@@ -56,7 +57,7 @@ def getHOG(imagepath):
                     bottom = top + 8
                     print("{}: {}-{}, {}-{}".format(counter, left, top, right, bottom))  # display image dimensions.
                     counter = counter + 1
-                    hist = computehistogram(angle[left:right, top:bottom], mag[left:right, top:bottom]) # hist is 1x9 vector
+                    hist = computehistogram(gradmax[left:right, top:bottom], anglemax[left:right, top:bottom]) # hist is 1x9 vector
 
 
     # for each block, compute histogram using angle bins.
