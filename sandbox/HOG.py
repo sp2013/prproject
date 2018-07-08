@@ -3,44 +3,46 @@ import cv2
 
 import gradient as gradObj
 
+blocksize = 8 # basic block size used for HOG computation.
 binsize = 20
-anglecentres = binsize * np.arange(9)
+histobinscount = 9
+numfeatures = 3780
+anglecentres = binsize * np.arange(histobinscount)
+
+def computeValues(center1, center2, angle, mag):
+    val1 = 0
+    val2 = 0
+    num = (center2 - angle) * mag
+    val1 = (float(num/binsize))
+    val2 = (float)(mag - val1)
+    return val1, val2
 
 # compute histogram of gradients using magnitude and angle block.
-def computehistogram(angle, mag, blocksize):
+def computehistogram(mag, angle, blocksize):
     #cv2.imshow("Gradient Image", magblock)
     #cv2.waitKey()
     # wrap around angle values beyond 180 - 360 to 0 - 180
-    binsize = 20
-    histobinscount = anglecentres.shape[0]
     hist = np.zeros(histobinscount)
     for rows in range(0, blocksize):
         for cols in range(0, blocksize):
-            center1 = 0
-            center2 = 0
             angleval = (int)(angle[rows, cols])
             magval = mag[rows, cols]
-            if angleval == 360:
-                angleval = 0
-            elif angleval > 180:
-                angleval = angleval - 180
-            # a = divmod(angleval, binsize) # gives array a[quotient, remainder]
+            if magval == 0:
+                continue
+            center1 = (int)(angleval/binsize) * binsize
+            center2 = center1 + binsize
+            val1, val2 = computeValues(center1, center2, angleval, magval)
+            center = divmod(angleval, 180)
+            angleval = center[1]
             q = int(angleval / binsize)
             r = angleval - binsize * q
-            if(r == 0):
-                hist[q] += magval
-            else: # case of not a boundary value for angle
-                if q == blocksize:
-                    center1 = anglecentres[q]
-                    center2 = 0
-                else:
-                    center1 = anglecentres[q]
-                    center2 = anglecentres[q+1]
-                # find distribution of angleval in two bins center1 and center2
-                val1 = (float)((binsize - (magval - anglecentres[center1])) * magval) / 20.0
-                val2 = (float)((binsize - (anglecentres[center2]-magval)) * magval) / 20.0
-                hist[center1] += val1
-                hist[center2] += val2
+            # find distribution of angleval in two bins center1 and center2
+            q1 = q
+            q2 = q + 1
+            if q == blocksize: # case of not a boundary value for angle
+                q2 = 0
+            hist[q1] += val1
+            hist[q2] += val2
     return hist
 
 
@@ -51,7 +53,7 @@ def getHOG(imagepath):
     #cv2.imshow("Gradient Image", grad)
     #cv2.waitKey()
     #cv2.destroyAllWindows()
-
+    #cv2.imwrite('C:\\Output\\testFlowerGrad.bmp', grad)
     # mag and angle have three channels each. pick up max value of gradient and corresponding angle to convert
     # this to array with only one channel.
     height, width, bytesperpix = grad.shape
@@ -69,7 +71,6 @@ def getHOG(imagepath):
             anglemax[rows, cols] = angle[rows, cols, gradmaxIndex[rows, cols]]
 
     # divide image in to blocks of 8 x 8
-    blocksize = 8
     xblocks = (int)(width / blocksize)
     yblocks = (int)(height / blocksize)
     blocks = 0
@@ -94,7 +95,7 @@ def getHOG(imagepath):
                     right = left + blocksize
                     bottom = top + blocksize
                     print("{}: {}-{}, {}-{}".format(counter, left, top, right, bottom))  # display image dimensions.
-                    blockhist = computehistogram(gradmax[left:right, top:bottom], anglemax[left:right, top:bottom], blocksize) # hist is 1x9 vector
+                    blockhist = computehistogram(gradmax[top:bottom, left:right], anglemax[top:bottom, left:right], blocksize) # hist is 1x9 vector
                     if counter == 0:
                         hist = blockhist
                     else:
@@ -102,7 +103,8 @@ def getHOG(imagepath):
                     counter = counter + 1
 
             # normalize histogram of size 36.
-            histnorm = hist / np.linalg.norm(hist)
+            normdiv = 0.0001 + np.linalg.norm(hist) # to avoid divide by zero condition
+            histnorm = hist / normdiv
             if blocks == 0:
                 imagehisto = histnorm
             else:
@@ -112,6 +114,12 @@ def getHOG(imagepath):
 
     return imagehisto
 
-hog = getHOG('../testData/juggballs.jpg')
+hogArray = np.zeros(shape=(4, numfeatures))
+for x in range(0, 1):
+    hogArray[x] = getHOG('..\\testData\\testFlower.png')
+
+hog = cv2.HOGDescriptor()
+im = cv2.imread('..\\testData\\testFlower.png')
+h = hog.compute(im)
 print('done')
 
