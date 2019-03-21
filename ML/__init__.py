@@ -2,10 +2,19 @@ from Linear_Regression1 import *
 from Linear_Regression2 import *
 from kNN_Algo import *
 from kMeans_Clustering import *
+from SVM import *
+from featureextraction import *
 
 import numpy as np
 
 if __name__ == '__main__':
+
+    imageList = extractAndSaveFeatures('C:/Users/patils7/Documents/SVM/INRIAPerson/Train')
+
+    '''
+        SVM
+    '''
+    printfeatureslabels()
 
     #intercept, slope = linear_regression2()
 
