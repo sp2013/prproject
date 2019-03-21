@@ -15,23 +15,35 @@ import cv2 as cv
 import numpy as np
 from array import array
 
-def extractAndSaveFeatures(directoryPath):
+def computeHOGFeatures(directoryPath):
 
     HOG_Width = 64
     HOG_Height = 128
     HOG_FeatureCount = 3780
-    # Feature extraction for positive samples folder.
-    posSamplesFolder = directoryPath + '/pos'
-    annotationsFolder = directoryPath + '/annotations'
-    featuresFile = directoryPath + '/features.txt'
 
+    posSamplesFolder = directoryPath + '/pos'
+    negSamplesFolder = directoryPath + '/neg'
+    annotationsFolder = directoryPath + '/annotations'
+    Label = 1 # for presence of human, Label is 1.
+    imageCount = 0
+    totalImages = 0 # number of positive plus negative samples.
+    for root, dirs, files in os.walk(posSamplesFolder):
+        totalImages = len(files)
+
+    for root, dirs, files in os.walk(negSamplesFolder):
+        totalImages = totalImages + len(files)
+
+    # allocate HOG features array for totalImages
+    HOGFeaturesArray = np.zeros(shape=(totalImages, HOG_FeatureCount))
+    LabelsArray = np.zeros(shape=(totalImages, 1))
+
+    # ---------------- FEATURE  COMPUTATION LOOP FOR POSITIVE SAMPLES ----------------
     for root, dirs, files in os.walk(posSamplesFolder):
         left = 0
         top = 0
         right = 0
         bottom = 0
-        imageCount = 0;
-        HOGFeaturesArray = np.zeros(shape=(len(files), HOG_FeatureCount))
+
         # get all image names from 'files' list in loop
         for name in files:
             extn = name.split(".")[-1]
@@ -63,20 +75,48 @@ def extractAndSaveFeatures(directoryPath):
 
                 posImagePath = posSamplesFolder + '/' + name
                 image = cv.imread(posImagePath)
-                boundingbox = image[top:bottom, left:right] #crop as per bounding box
-                #cv.imshow("Human", boundingbox)
+                boundingboxImage = image[top:bottom, left:right] #crop as per bounding box
+                #cv.imshow("Human", boundingboxImage)
                 #cv.waitKey(0)
                 #cv.destroyAllWindows()
-                # resize cropped bounding box to 64 x 128
-                scaleX = HOG_Width / boundingbox.shape[1]
-                scaleY = HOG_Height / boundingbox.shape[0]
-                scaledBox = cv.resize(boundingbox, None, fx=scaleX, fy=scaleY, interpolation=cv.INTER_LINEAR)
+                # resize cropped bounding box containing human figure to 64 x 128
+                scaleX = HOG_Width / boundingboxImage.shape[1]
+                scaleY = HOG_Height / boundingboxImage.shape[0]
+                scaledBoxImg = cv.resize(boundingboxImage, None, fx=scaleX, fy=scaleY, interpolation=cv.INTER_LINEAR)
                 hog = cv.HOGDescriptor()
-                HOGFeaturesArray[imageCount] = (hog.compute(scaledBox)).ravel()
-                #np.save(featuresFile, h)
+                HOGFeaturesArray[imageCount] = (hog.compute(scaledBoxImg)).ravel()
+                LabelsArray[imageCount][0] = Label  # assign label
                 imageCount = imageCount + 1
+                msg = 'Processed ' + imageCount.__str__() + ' of ' + totalImages.__str__()
+                print(msg)
 
-        np.savetxt(featuresFile, HOGFeaturesArray, fmt='%1.4f')
+    # ---------------- FEATURE  COMPUTATION LOOP FOR NEGATIVE SAMPLES ----------------
+    for root, dirs, files in os.walk(negSamplesFolder):
+        Label = 0  #change Label value to 0, for negative samples.
+        # get all image names from 'files' list in loop
+        for name in files:
+            extn = name.split(".")[-1]
+            if extn == 'png':  # look for image with png extension.
+                negImagePath = negSamplesFolder + '/' + name
+                image = cv.imread(negImagePath)
+                # cv.imshow("Human", image)
+                # cv.waitKey(0)
+                # cv.destroyAllWindows()
+                # resize image bounding box to 64 x 128
+                scaleX = HOG_Width / image.shape[1]
+                scaleY = HOG_Height / image.shape[0]
+                scaledBoxImg = cv.resize(image, None, fx=scaleX, fy=scaleY, interpolation=cv.INTER_LINEAR)
+                hog = cv.HOGDescriptor()
+                HOGFeaturesArray[imageCount] = (hog.compute(scaledBoxImg)).ravel() # convert tall vector to horizontal with ravel()
+                LabelsArray[imageCount][0] = Label  # assign label
+                imageCount = imageCount + 1
+                msg = 'Processed ' + imageCount.__str__() + ' of ' + totalImages.__str__()
+                print(msg)
+
+    featuresFile = directoryPath + '/features.csv'
+    labelsFile = directoryPath + '/labels.csv'
+    np.savetxt(featuresFile, HOGFeaturesArray, fmt='%1.4f', delimiter=',')
+    np.savetxt(labelsFile, LabelsArray, fmt='%d')
 
 
 
