@@ -20,13 +20,13 @@ def Train():
     return
 
 def Test():
-    y_pred = test(modelFile, featuresTestFile)
+    accuracy = test(modelFile, featuresFile, labelsFile)
 
 if __name__ == '__main__':
 
-    #ComputeFeatures()
+    # ComputeFeatures()
 
-    Train()
+    # Train()
 
     Test()
 
