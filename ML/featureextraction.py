@@ -21,8 +21,8 @@ def computeHOGFeatures(directoryPath):
     HOG_Height = 128
     HOG_FeatureCount = 3780
 
-    posSamplesFolder = directoryPath + '/pos'
-    negSamplesFolder = directoryPath + '/neg'
+    posSamplesFolder = directoryPath + '/pos_'
+    negSamplesFolder = directoryPath + '/neg_'
     annotationsFolder = directoryPath + '/annotations'
     Label = 1 # for presence of human, Label is 1.
     imageCount = 0
@@ -117,6 +117,8 @@ def computeHOGFeatures(directoryPath):
     labelsFile = directoryPath + '/labels.csv'
     np.savetxt(featuresFile, HOGFeaturesArray, fmt='%1.4f', delimiter=',')
     np.savetxt(labelsFile, LabelsArray, fmt='%d')
+
+    return featuresFile, labelsFile
 
 
 
